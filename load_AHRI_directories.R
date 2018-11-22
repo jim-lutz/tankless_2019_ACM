@@ -28,3 +28,5 @@ DT_AHRI_dir[ , list(nrefnum = length(unique(`AHRI Certified Reference Number`)))
 # [1] 340
 # OK
 
+# save DT_AHRI_dir as csv
+write_csv(DT_AHRI_dir, path = "data/DT_AHRI_dir.csv")
