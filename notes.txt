@@ -1,0 +1,6 @@
+2018-11-22
+    start load_AHRI_directories.R to read AHRI directories into R
+    
+    did I accidentally down load the same records twice?
+    
+
