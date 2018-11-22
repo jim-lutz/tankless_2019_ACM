@@ -11,7 +11,7 @@ wd_AHRI_dirs <- "/home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless
 
 # find the xlsx files there
 l_fn <-
-  list.files(path = wd_AHRI_dirs, pattern = ".xlsx", full.names = TRUE)
+  list.files(path = wd_AHRI_dirs, pattern = ".*_MaxGPM_.*.xlsx", full.names = TRUE)
 
 # read the files
 DT_AHRI_dir <-
@@ -20,11 +20,11 @@ DT_AHRI_dir <-
 # see what's there
 names(DT_AHRI_dir)
 nrow(DT_AHRI_dir)
-# [1] 500
-# why 500?
+# [1] 340
+# OK
 
 # number of AHRI Certified Reference Number
 DT_AHRI_dir[ , list(nrefnum = length(unique(`AHRI Certified Reference Number`)))]
-# 1:     250
-# accidentally downloaded same thing twice?
+# [1] 340
+# OK
 

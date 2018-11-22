@@ -2,5 +2,7 @@
     start load_AHRI_directories.R to read AHRI directories into R
     
     did I accidentally down load the same records twice?
+    no only downloads the first 250 records.
     
+    redo search w/ Max GPM <= 5.0 , then Max GPM >= 5.1
 
