@@ -5,4 +5,6 @@
     no only downloads the first 250 records.
     
     redo search w/ Max GPM <= 5.0 , then Max GPM >= 5.1
+    
+    download the Energy Guide Label pdf files
 
