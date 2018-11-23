@@ -9,9 +9,23 @@ source("setup.R")
 load("data/DT_CEC_dir.Rdata")
 
 names(DT_CEC_dir)
+# [1] "Manufacturer"                       "Brand"                             
+# [3] "Model Number"                       "Energy Source"                     
+# [5] "Pilot Light? (T/F)"                 "Heattraps"                         
+# [7] "Insulation Type"                    "Mobile Home?"                      
+# [9] "Rated Volume"                       "First Hour Rating"                 
+# [11] "Maximum GPM"                        "Input BTUH"                        
+# [13] "Recovery Efficiency"                "Annual Energy Consumption KBTU"    
+# [15] "Energy Factor"                      "Energy Factor Std"                 
+# [17] "Tested Uniform Energy Factor (T/F)" "Pilot Light BTUH"                  
+# [19] "Uniform Energy Factor"              "Regulatory Status"                 
+# [21] "Uniform Energy Factor Std"          "Add Date"                          
+# [23] "Add_Date"  
+
+DT_CEC_dir
 # 14985
 
-# extract just the tankless WHs
+# extract just the natural gas WHs
 DT_CEC_dir[`Energy Source` == "Natural Gas"]
 # 8341
 
@@ -26,12 +40,12 @@ DT_CEC_dir[`Energy Source` == "Natural Gas" &
              `Uniform Energy Factor` > 0]
 # 665
 
-# pull over just those into a new data.table
+# pull over just these into a new data.table
 DT_tankless <- DT_CEC_dir[`Energy Source` == "Natural Gas" &
                             `Maximum GPM`  >  0 &
                             `Uniform Energy Factor` > 0]
 
-# are any columns completely NA?
+# are any columns completely NA? or have other problems?
 summary(DT_tankless)
 # `Pilot Light? (T/F)` vast majority are TRUE?
 # `Heattraps` is FALSE or NA
@@ -43,33 +57,26 @@ summary(DT_tankless)
 # `Energy Factor` about half are NA
 # `Energy Factor Std` are all NA
 # `Pilot Light BTUH` are mostly zero, a few numeric <= 1 BTUH ?
+# `Uniform Energy Factor` are as fractions
+# `Uniform Energy Factor Std` is all .81? Yeah that's OK, fed minimums
+# `Add_Date` are all since 2017-08-24,  good
 
-# where are the ~300 ones?
-order(DT_tankless$`Pilot Light BTUH`)
-summary(DT_tankless$`Pilot Light BTUH`)
-#    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-# 0.00000 0.00000 0.00000 0.02744 0.00000 1.00000       9 
-
-# they might be character?
-str(DT_tankless)
-# no
-
-DT_tankless[`Pilot Light BTUH`>0.0, list(`Pilot Light BTUH`)]
-
-DT_tankless[`Maximum GPM`>=1.5 &
-              `Maximum GPM`<=2.5, 
-            list(`Pilot Light BTUH`,`Maximum GPM`)]
-
-DT_CEC_dir[`Maximum GPM`>=1.5 &
-              `Maximum GPM`<=2.5, 
-            list(`Pilot Light BTUH`,`Maximum GPM`)][order(-`Pilot Light BTUH`)]
-# was getting confused between tankless and non-tankless in DT_CEC_dir
-# only 0 | 1 | NA DT_tankless
-
-# 
 # look at some plots
 qplot(x = `Uniform Energy Factor`,
       y = `Recovery Efficiency`,
       data = DT_tankless)
 # looks OK, except some RE == 100 !
-# 
+
+# same plot weighted by number of data elements at each point
+DT_tankless[ , list(n=length(`Manufacturer`)),
+             by = c('Uniform Energy Factor','Recovery Efficiency') ]
+
+ggplot(data = DT_tankless[ , list(n=length(`Manufacturer`)),
+                           by = c('Uniform Energy Factor','Recovery Efficiency') ]) +
+  geom_point( aes(x = `Uniform Energy Factor`,
+                  y = `Recovery Efficiency`,
+                  size = n )
+            )
+
+  
+

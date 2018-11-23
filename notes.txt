@@ -36,6 +36,9 @@
     
     I was mistaken, should have used a "l" instead of a "|".
     
+    plot of UEF vs RE looks reasonable
+    
+    
     
     
     
