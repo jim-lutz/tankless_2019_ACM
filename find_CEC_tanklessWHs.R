@@ -61,20 +61,53 @@ summary(DT_tankless)
 # `Uniform Energy Factor Std` is all .81? Yeah that's OK, fed minimums
 # `Add_Date` are all since 2017-08-24,  good
 
+# remove unneeded variables
+DT_tankless[, c("Energy Source",
+                "Pilot Light? (T/F)",
+                "Heattraps",
+                "Insulation Type", 
+                "Mobile Home?",
+                "First Hour Rating",
+                "Energy Factor",
+                "Energy Factor Std",
+                "Tested Uniform Energy Factor (T/F)",
+                "Pilot Light BTUH",
+                "Regulatory Status",
+                "Uniform Energy Factor Std",
+                "Add Date"
+                ) := NULL]
+
+# clean up names of DT_tankless
+names(DT_tankless)
+
+# fix names
+setnames(DT_tankless,
+         old = c("Maximum GPM",
+                 "Input BTUH",
+                 "Recovery Efficiency",
+                 "Annual Energy Consumption KBTU",
+                 "Uniform Energy Factor"),
+         new = c('MaxGPM',
+                 "Input BTUH",
+                 "RE",
+                 "Qan",
+                 "UEF")
+        )
+
 # look at some plots
-qplot(x = `Uniform Energy Factor`,
-      y = `Recovery Efficiency`,
+qplot(x = `UEF`,
+      y = `RE`,
       data = DT_tankless)
 # looks OK, except some RE == 100 !
 
 # same plot weighted by number of data elements at each point
 DT_tankless[ , list(n=length(`Manufacturer`)),
-             by = c('Uniform Energy Factor','Recovery Efficiency') ]
+             by = c('UEF','RE') ]
 
 ggplot(data = DT_tankless[ , list(n=length(`Manufacturer`)),
-                           by = c('Uniform Energy Factor','Recovery Efficiency') ]) +
-  geom_point( aes(x = `Uniform Energy Factor`,
-                  y = `Recovery Efficiency`,
+                           by = c('UEF','RE') ]) +
+  geom_point( aes(x = UEF,
+                  y = RE,
                   size = n )
             )
 

@@ -40,6 +40,10 @@
     
     loaded DOE directory UEF vs RE looks similar to the CEC one
     
+    clean up CEC tankless directory names
+    
+    
+    
     
     
     
