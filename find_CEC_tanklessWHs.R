@@ -78,5 +78,6 @@ ggplot(data = DT_tankless[ , list(n=length(`Manufacturer`)),
                   size = n )
             )
 
-  
+# save DT_tankless as .Rdata for later use
+save(DT_tankless, file = "data/DT_tankless_CEC.Rdata")
 
