@@ -42,45 +42,15 @@ nrow(DT_CEC_dir)
 # [1] 14985
 
 str(DT_CEC_dir)
-# $ Uniform Energy Factor             : logi  NA NA NA NA NA NA ...
 # the logical columns are logicals
 # 'Add Date' came in as character
 
 summary(DT_CEC_dir)
+# seems like it came in as it was saved
 
+# change 'Add Date' to POSIXct with time zone attribute set to tz.
+DT_CEC_dir[, Add_Date := mdy(`Add Date`, tz = 'America/Los_Angeles')]
 
+# now save it as an .Rdata file for late use and clean up
+save(DT_CEC_dir, file = "data/DT_CEC_dir.Rdata")
 
-# have to subset this for tanless WHs
-
-
-# number of AHRI Certified Reference Number
-DT_AHRI_dir[ , list(nrefnum = length(unique(`AHRI Certified Reference Number`)))]
-# [1] 340
-# OK
-
-# clean up ref num name
-setnames(DT_AHRI_dir, old = "AHRI Certified Reference Number", new = "AHRIrefnum")
-
-# save DT_AHRI_dir as csv
-write_csv(DT_AHRI_dir, path = "data/DT_AHRI_dir.csv")
-
-# make a the urls for EnergyGuide labels
-# https://www.ahridirectory.org/Certificate/RenderFTCLabel?ReferenceId=5526763&Program=24
-url.1 <- "https://www.ahridirectory.org/Certificate/RenderFTCLabel?ReferenceId="
-url.2 <- "&Program=24"
-DT_AHRI_dir[ , url := paste0(url.1,AHRIrefnum,url.2)]
-
-# directory for Energy Guide Labels
-egl_dir <- "/home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/AHRI/2018-11-22/EnergyGuideLabels/"
-
-# loop through all the ref numbers
-with(DT_AHRI_dir, {
-  for(rn in 1:nrow(DT_AHRI_dir) ) { # 1:2 for testing
-    download.file(url = DT_AHRI_dir$url[rn],
-                  destfile = paste0(egl_dir,
-                                    DT_AHRI_dir$AHRIrefnum[rn],
-                                    ".pdf"),
-                  mode = "wb")
-    }
-  }
-)  
