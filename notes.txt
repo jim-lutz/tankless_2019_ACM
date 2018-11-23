@@ -38,6 +38,7 @@
     
     plot of UEF vs RE looks reasonable
     
+    loaded DOE directory UEF vs RE looks similar to the CEC one
     
     
     
