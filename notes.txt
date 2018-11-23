@@ -8,3 +8,34 @@
     
     download the Energy Guide Label pdf files
 
+2018-11-23
+    get CEC directories
+    https://cacertappliances.energy.ca.gov/Pages/Search/AdvancedSearch.aspx
+    Select Appliance Type
+        Select Category: Water Heater Products
+        Select Appliance: Small Gas & Oil Water Htrs.
+        Select Appliance Status: Approved
+    Select Fields to Display
+        Select All
+        
+    Search Results
+    14985 record(s) found         
+    Export To: /home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/CEC/2018-11-23 Small Gas & Oil Water Htrs.csv
+
+    get DOE directories
+    https://www.regulations.doe.gov/certification-data/CCMS-4-Water_Heaters.html#q=Product_Group_s%3A%22Water%20Heaters%22
+    + More Options 
+    Type of Heater: Instantaneous Gas-fired Water Heater
+    650 Models
+    Download
+    /home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/DOE/Water_Heaters_2018-11-23_9-15-54.csv
+    
+    loading CEC directory, a lot of strange data 
+    and UEF came through as logical even though specified col_type as double
+
+
+
+        
+    
+    
+    
