@@ -21,9 +21,9 @@ cat("\014")
 update.packages(checkBuilt=TRUE)
 
 sessionInfo() 
-  # R version 3.4.3 (2017-11-30)
+  # R version 3.5.1 (2018-07-02)
   # Platform: x86_64-pc-linux-gnu (64-bit)
-  # Running under: Ubuntu 16.04.3 LTS
+  # Running under: Ubuntu 18.04.1 LTS
 
 # work with plyr 
 if(!require(plyr)){install.packages("plyr")}
@@ -35,49 +35,16 @@ library(plyr)
 if(!require(data.table)){install.packages("data.table")}
 library(data.table)
 
-
 # work with tidyverse
 # http://tidyverse.org/
 # needed libxml2-dev installed
 if(!require(tidyverse)){install.packages("tidyverse")}
 library(tidyverse)
 
-# work with lubridate 
-if(!require(lubridate)){install.packages("lubridate")}
-library(lubridate)
-# part of tidyverse but wasn't seeing it
-
-
-# try readxl
-if(!require(readxl)){install.packages("readxl")}
-library(readxl)
-
-# janitor for excel_numeric_to_date and other goodies
-if(!require(janitor)){install.packages("janitor")}
-library(janitor)
-
-# work with stringr 
-# if(!require(stringr)){install.packages("stringr")}
-# library(stringr)
-# part of tidyverse
-
-# work with ggplot2
-# if(!require(ggplot2)){install.packages("ggplot2")}
-# library(ggplot2)
-# part of tidyverse
-
 # work with plotly
 # https://plot.ly/r/getting-started/#getting-started-with-plotly-for-r
 if(!require(plotly)){install.packages("plotly")}
 library(plotly)
-
-# required to export images from plotly
-# if(!require(RSelenium)){install.packages("RSelenium")}
-# library(RSelenium)
-
-# environment variables for my plotly account.
-Sys.setenv("plotly_username" = "jlutz")
-Sys.setenv("plotly_api_key" = "8ynkq1jhd9f3auYGyO9O")
 
 # change the default background for ggplot2 to white, not gray
 theme_set( theme_bw() )

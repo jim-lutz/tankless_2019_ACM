@@ -33,6 +33,12 @@
     loading CEC directory, a lot of strange data 
     and UEF came through as logical even though specified col_type as double
     had to use guess_max as 15000 and not set col_type
+    
+    I was mistaken, should have used a "l" instead of a "|".
+    
+    
+    
+    
 
 
 
