@@ -9,38 +9,28 @@ source("setup.R")
 # CEC directory filename
 fn_CEC_dir <- "/home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/CEC/2018-11-23 Small Gas & Oil Water Htrs.csv"
 
-# specify column types for read_csv, see cols()
-col_type <- 'cccc||c|dddididd|idcdD'
-  # Manufacturer	c	character
-  # Brand	c	character
-  # Model Number	c	character
-  # Energy Source	c	character
-  # Pilot Light? (T/F)	|	logical
-  # Heattraps	|	logical
-  # Insulation Type	c	character
-  # Mobile Home?	|	logical
-  # Rated Volume	d	double
-  # First Hour Rating	d	double
-  # Maximum GPM	d	double
-  # Input BTUH	i	integer
-  # Recovery Efficiency	d	double
-  # Annual Energy Consumption KBTU	i	integer
-  # Energy Factor	d	double
-  # Energy Factor Std	d	double
-  # Tested Uniform Energy Factor (T/F)	|	logical
-  # Pilot Light BTUH	i	integer
-  # Uniform Energy Factor	d	double
-  # Regulatory Status	c	character
-  # Uniform Energy Factor Std	d	double
-  # Add Date	D	date
-
 # read the file
 DT_CEC_dir <- data.table( read_csv(file = fn_CEC_dir,
-                                   # col_types = col_type,
                                    guess_max = 15000) )
-# Error in is.list(col_types) : Unknown shortcut: |
-# In addition: Warning message:
-# Missing column names filled in: 'X23' [23] 
+  # Parsed with column specification:
+  #   cols(
+  #     .default = col_double(),
+  #     Manufacturer = col_character(),
+  #     Brand = col_character(),
+  #     `Model Number` = col_character(),
+  #     `Energy Source` = col_character(),
+  #     `Pilot Light? (T/F)` = col_logical(),
+  #     Heattraps = col_logical(),
+  #     `Insulation Type` = col_character(),
+  #     `Mobile Home?` = col_logical(),
+  #     `Tested Uniform Energy Factor (T/F)` = col_logical(),
+  #     `Regulatory Status` = col_character(),
+  #     `Add Date` = col_character(),
+  #     X23 = col_logical()
+  #   )
+  # See spec(...) for full column specifications.
+  # Warning message:
+  #   Missing column names filled in: 'X23' [23] 
 
 # see what's there
 names(DT_CEC_dir)
