@@ -45,7 +45,7 @@ egl_dir <- "/home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/AHRI
 
 # loop through all the ref numbers
 with(DT_AHRI_dir, {
-  for(rn in 1:2 ) {
+  for(rn in 1:nrow(DT_AHRI_dir) ) { # 1:2 for testing
     download.file(url = DT_AHRI_dir$url[rn],
                   destfile = paste0(egl_dir,
                                     DT_AHRI_dir$AHRIrefnum[rn],
