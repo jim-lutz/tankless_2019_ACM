@@ -89,4 +89,31 @@ DT_EGL[is.na(brand) & !is.na(EGL),
        ] 
 
 
+# get the model number
+DT_EGL[, model_num := str_extract(EGL, "Model [A-Z0-9l. -]+ Estimated")]
+DT_EGL[, model_num := str_replace(model_num, "Model ", "")]
+DT_EGL[, model_num := str_replace(model_num, " Estimated", "")]
+
+# fix 'l' to 'I'
+DT_EGL[, model_num := str_replace(model_num, "l", "I")]
+
+# look at some entries in the data.table
+DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
+       list(AHRIrefnum, 
+            brand,
+            model_num
+            )
+       ] 
+
+# look at all the model_num
+DT_EGL[, list(n = length(AHRIrefnum)),
+       by=model_num][order(-n)]
+# 7 missing, 2 duplicates, only 1 of everything else
+
+DT_EGL[is.na(model_num) & EGL != "",
+       list(AHRIrefnum, 
+            EGL = str_sub(EGL, 1, 20),
+            model_num
+            )
+       ] 
 
