@@ -1,0 +1,32 @@
+# parse_EnergyGuideLabels.txt.R
+# script to parse the AHRI Energy Guide labels text files in
+# /home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/tankless_2019_ACM/data/tiff/
+# started by Jim Lutz "Sat Nov 24 10:34:19 2018"
+
+# set packages & etc
+source("setup.R")
+
+# build a list of the text files there
+l_fn <-
+  list.files(path = "data/tiff", pattern = "*.txt", full.names = TRUE)
+# 340 of them
+
+# make a blank data.table to hold everything
+DT_EGL <- data.table(character(length = length(l_fn))) #  creates a 0-row data.table
+
+# initialize data.table with variables needed later
+DT_EGL[, AHRIrefnum := NA ]
+
+# loop through the txt files
+for( fn in c(1,5,22,150,336,340) ) { 
+  # for development use c(1,22,150,340)
+  # for production use 1:length(l_fn)
+  
+  # show the filename
+  cat(l_fn[fn],"\n")
+  
+  # get the AHRIrefnum from the filename
+  DT_EGL[fn, AHRIrefnum := str_extract(l_fn[fn], "[0-9]{6,}" )]
+  
+}
+  
