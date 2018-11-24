@@ -14,12 +14,9 @@ l_fn <-
 # make a blank data.table to hold everything
 DT_EGL <- data.table(character(length = length(l_fn))) #  creates a 0-row data.table
 
-# initialize data.table with variables needed later
-DT_EGL[, AHRIrefnum := NA ]
-
 # loop through the txt files
-for( fn in c(1,5,22,150,336,340) ) { 
-  # for development use c(1,22,150,340)
+for( fn in 1:length(l_fn) ) { 
+  # for development use c(1,5,22,150,336,340)
   # for production use 1:length(l_fn)
   
   # show the filename
