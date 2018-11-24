@@ -24,8 +24,9 @@ l_fn <-
 DT_EGL <- data.table()
 
 # loop through the pdf files
-for( fn in c(1,150,340) ) { 
-  # for development use l_fn[c(1,22,150,340)
+for( fn in 1:length(l_fn) ) { 
+  # for development use c(1,22,150,340)
+  # for production use 1:length(l_fn)
   
   # show the filename
   # cat(l_fn[fn],"\n")

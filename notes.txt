@@ -65,6 +65,8 @@
     since the *.txt files are small, could read them in as one long string and use string matching?
     the files aren't completely consistent, so this may be messy.
     
+    see http://www.mjdenny.com/Text_Processing_In_R.html
+    and https://quanteda.io/articles/quickstart.html
     
     
     
