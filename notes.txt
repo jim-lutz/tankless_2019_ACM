@@ -61,12 +61,22 @@
     got convert and tesseract to work
     better to convert them all to text files then use a different script to extract data.
         
-    need to parse out the brand, MaxGPM, model_num, and Eannual,f (if that's what it is)
-    since the *.txt files are small, could read them in as one long string and use string matching?
-    the files aren't completely consistent, so this may be messy.
-    
     see http://www.mjdenny.com/Text_Processing_In_R.html
     and https://quanteda.io/articles/quickstart.html, this one is probably too elaborate
+    
+    These AHRIrefnums don't have Energy Guide Labels posted on the AHRI directory.
+    202067561
+    202067563
+    202068374
+    202068376
+    202068377
+    
+    since the *.txt files are small, read them in as one long string into the data.table
+    removed \n \r & \f first.
+
+    need to parse out the brand, MaxGPM, model_num, and Eannual,f (if that's what it is)
+    the files aren't completely consistent, so this may be messy.
+    quicker and less messy inside data.table
     
     
     
