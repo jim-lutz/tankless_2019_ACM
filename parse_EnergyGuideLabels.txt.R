@@ -1,6 +1,7 @@
 # parse_EnergyGuideLabels.txt.R
-# script to parse the AHRI Energy Guide labels text files in
-# /home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/tankless_2019_ACM/data/tiff/
+# script to parse the AHRI Energy Guide labels text files
+# input is data/tiff/*.txt
+# output is data DT_EGL.Rdata
 # started by Jim Lutz "Sat Nov 24 10:34:19 2018"
 
 # set packages & etc
@@ -116,4 +117,52 @@ DT_EGL[is.na(model_num) & EGL != "",
             model_num
             )
        ] 
+
+
+# get Eannual,f (if that's what it is)
+# get the model number
+DT_EGL[, Eannual_f := str_extract(EGL, "Estimated yearly energy use: [0-9.]+ therms")]
+DT_EGL[, Eannual_f := str_replace(Eannual_f, "Estimated yearly energy use: ", "")]
+DT_EGL[, Eannual_f := str_replace(Eannual_f, " therms", "")]
+
+# convert to numeric
+DT_EGL[, Eannual_f := as.numeric(Eannual_f)]
+
+# look at some entries in the data.table
+DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
+       list(AHRIrefnum, 
+            brand,
+            Eannual_f
+       )
+       ] 
+
+# look at all the model_num
+DT_EGL[, list(n = length(AHRIrefnum)),
+       by=Eannual_f][order(-n)]
+# 5 missing, rest look reasonable
+
+DT_EGL[is.na(Eannual_f) & EGL != "",
+       list(AHRIrefnum, 
+            EGL = str_sub(EGL, 1, 20),
+            Eannual_f
+            )
+       ] 
+# Empty data.table (0 rows) of 3 cols: AHRIrefnum,EGL,Eannual_f
+
+# look at some plots
+qplot(x = `Eannual_f`,
+      data = DT_EGL)
+
+# see if differences by brand
+ggplot(data = DT_EGL) +
+  geom_bar( aes(x = Eannual_f), width = 1 ) +
+  facet_wrap(vars(brand))
+# looks plausible
+
+# save DT_EGL as .Rdata for later use
+save(DT_EGL, file = "data/DT_EGL.Rdata")
+
+  
+
+
 

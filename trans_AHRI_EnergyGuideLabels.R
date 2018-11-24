@@ -1,6 +1,7 @@
-# parse_AHRI_EnergyGuideLabels.R
-# script to parse the AHRI Energy Guide labels pdf files of Natural Gas Instantaneous WHs in
+# trans_AHRI_EnergyGuideLabels.R
+# script to translate the AHRI Energy Guide labels pdf files of Natural Gas Instantaneous WHs in
 # /home/jiml/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/AHRI/2018-11-22/EnergyGuideLabels/
+# to data/tiff/*.txt files
 # started by Jim Lutz "Fri Nov 23 16:50:31 2018"
 
 # based on /home/jiml/HotWaterResearch/projects/CECHWT24/2016/2016 CBECC UEF/default tankless/EnergyGuide labels/energyguide.pl
