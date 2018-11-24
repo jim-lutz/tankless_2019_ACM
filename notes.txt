@@ -57,15 +57,14 @@
     is equal to Uniform Energy Factor / Qout from test draw pattern
     that might show the difference of Annual Energy total vs fossil
     
-
-    
-    
-    
-    
-
-
-
+2018-11-24
+    got convert and tesseract to work
+    better to convert them all to text files then use a different script to extract data.
         
+    need to parse out the brand, MaxGPM, model_num, and Eannual,f (if that's what it is)
+    since the *.txt files are small, could read them in as one long string and use string matching?
+    the files aren't completely consistent, so this may be messy.
+    
     
     
     

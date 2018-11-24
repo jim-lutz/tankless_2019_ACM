@@ -56,8 +56,10 @@ for( fn in c(1,150,340) ) {
                    paste0("data/tiff/",AHRIrefnum,"-001")    # outputbase
                    )
           )
-          
+
+  # now clean up, remove since they're so big
+  unlink("data/tiff/*.tif")
   
 }
-  
+
 
