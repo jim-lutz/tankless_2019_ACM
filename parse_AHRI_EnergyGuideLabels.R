@@ -24,22 +24,33 @@ l_fn <-
 DT_EGL <- data.table()
 
 # loop through the pdf files
-for( fn in c(1,4,22,50,340) ) { # for development use l_fn[c(1,4,22,50,340)
+for( fn in c(1,150,340) ) { 
+  # for development use l_fn[c(1,22,150,340)
+  
   # show the filename
-  #cat(l_fn[fn],"\n")
+  cat(l_fn[fn],"\n")
 
   # just the AHRIrefnum
   AHRIrefnum <- str_extract(l_fn[fn],"[0-9]{6,}")
   
   cat(AHRIrefnum,"\n")
   
-  args = c("-tiff", paste0("'",l_fn[fn],"'"), paste0("data/tiff/",AHRIrefnum) )
-  cat(args,"\n")
-  
-  # extract a tiff file with pdfimages
+  # extract images to a tiff file with pdfimages
   system2(command = "pdfimages",
-          args
+          args = c("-tiff",   # Change the default output format to TIFF.
+                   paste0("'",l_fn[fn],"'"), # PDF-file
+                   paste0("data/tiff/",AHRIrefnum) ) # image-root
           )
-
+  
+  # use convert from imagemagick to change the threshold to turn it black and white
+  system2(command = "convert",  # convert [input-option] input-file [output-option] output-file
+          args = c(paste0("data/tiff/",AHRIrefnum,"-000.tif"), # input-file
+                   "-threshold", "50%", "-unsharp", "10",      # output-options
+                   paste0("data/tiff/",AHRIrefnum,"-001.tif")  # output-file
+                   )
+          )
+  
+  
 }
   
+
