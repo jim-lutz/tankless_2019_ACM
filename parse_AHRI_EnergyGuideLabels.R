@@ -28,7 +28,7 @@ for( fn in c(1,150,340) ) {
   # for development use l_fn[c(1,22,150,340)
   
   # show the filename
-  cat(l_fn[fn],"\n")
+  # cat(l_fn[fn],"\n")
 
   # just the AHRIrefnum
   AHRIrefnum <- str_extract(l_fn[fn],"[0-9]{6,}")
@@ -50,6 +50,13 @@ for( fn in c(1,150,340) ) {
                    )
           )
   
+  # OCR using tesseract
+  system2(command = "tesseract",  # tesseract imagename|stdin outputbase|stdout [options...]
+          args = c(paste0("data/tiff/",AHRIrefnum,"-001.tif"), # imagename
+                   paste0("data/tiff/",AHRIrefnum,"-001")    # outputbase
+                   )
+          )
+          
   
 }
   
