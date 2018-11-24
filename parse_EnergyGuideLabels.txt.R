@@ -25,5 +25,17 @@ for( fn in 1:length(l_fn) ) {
   # get the AHRIrefnum from the filename
   DT_EGL[fn, AHRIrefnum := str_extract(l_fn[fn], "[0-9]{6,}" )]
   
-}
+  # slurp in the file
+  EGLtxt <- read_file(file = l_fn[fn] )
   
+  # remove line breaks, returns & EOF
+  EGLtxt <- str_replace_all(EGLtxt, "[\r\n\f]" , " ")
+  
+  # put into the data.table for debugging later
+  DT_EGL[fn, EGL := EGLtxt]
+}
+
+DT_EGL 
+DT_EGL[c(1,5,22,150,336,340), list(AHRIrefnum, 
+                                   EGLtxt = str_sub(EGLtxt, 1, 20)
+                                   )] 
