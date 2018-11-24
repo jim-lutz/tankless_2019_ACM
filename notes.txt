@@ -42,7 +42,22 @@
     
     clean up CEC tankless directory names
     
+    And here's what on the Energy Guide Label
+        Max GPM
+        GPM Rating {very small | low | medium | high}
+        Estimated yearly energy use (in therms)
+            Not clear whether this is total energy use or just the gas use.
+        cost ( This is therms * $1.09/therm)
+
+    translating energyguide.pl into .R to parse the Energy Guide labels with
+    pdfimages, convert, tesseract 
     
+    
+    check AHRI data to see if Estimated yearly energy use from Energy Guide Label
+    is equal to Uniform Energy Factor / Qout from test draw pattern
+    that might show the difference of Annual Energy total vs fossil
+    
+
     
     
     
