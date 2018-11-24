@@ -53,7 +53,7 @@ DT_EGL[, MaxGPM := as.numeric(str_sub(MaxGPM, 2, 5))]
 # look at some entries in the data.table
 DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
        list(AHRIrefnum, 
-            EGLtxt = str_sub(EGLtxt, 1, 20),
+            EGL = str_sub(EGL, 1, 20),
             MaxGPM
             )
        ] 
@@ -61,3 +61,32 @@ DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
 # look at all the MaxGPMs
 DT_EGL[, list(n = length(AHRIrefnum)),
        by=MaxGPM][order(MaxGPM)]
+# looks reasonable
+
+# get the brand
+DT_EGL[, brand := str_extract(EGL, "Gas [A-Z. /]+ Capacity")]
+DT_EGL[, brand := str_replace(brand, "Gas ", "")]
+DT_EGL[, brand := str_replace(brand, " Capacity", "")]
+
+# look at some entries in the data.table
+DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
+       list(AHRIrefnum, 
+            EGL = str_sub(EGL, 1, 20),
+            brand
+            )
+       ] 
+
+# look at all the brands
+DT_EGL[, list(n = length(AHRIrefnum)),
+       by=brand][order(-n)]
+# looks reasonable
+
+DT_EGL[is.na(brand) & !is.na(EGL),
+       list(AHRIrefnum, 
+            EGL = str_sub(EGL, 1, 20),
+            brand
+            )
+       ] 
+
+
+
