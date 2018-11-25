@@ -102,6 +102,9 @@
 	
     and examine	F
     
+    that didn't work. fossil and total were not measured indepently.
+    it's way too linear of a fit.
+    Eannul_F was not doubt calculated from UEF    
     
     
     
