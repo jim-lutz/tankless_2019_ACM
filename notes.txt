@@ -81,7 +81,28 @@
     parsed into DT_EGL, seems to have worked OK.
     
     next group by manufacturer?
-    then calculate Eannul from UEF based on bin
+    then calculate Eannul,e from UEF based on bin
+    
+    calculate Eannual,e from
+    
+    Qin.UEF = Eannual,f * 100,000 + Eannual,e * 3412  
+    
+    Eannual,e = ((Qout.UEF / UEF) - (Eannual,f * 100,000)) / 3412  
+    
+    where,
+    
+    Eannual,f   is from the Energy Guide Labels
+    Qin.UEF = Qout.UEF / UEF
+    Qout is calculated from test procedure conditions and draw patterns
+    ~/HotWaterResearch/projects/CECHWT24/2019 ACM tankless/Tankless WH consumption calculations for ACM.23.doc    
+    
+    then calculate the ratio of gas consumption to total energy consumption	
+    
+    F = 1 / { 1+ (Eannual,e / Eannual,f) * 3412 / 100,000 }
+	
+    and examine	F
+    
+    
     
     
     
