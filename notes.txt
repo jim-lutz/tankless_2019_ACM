@@ -104,9 +104,36 @@
     
     that didn't work. fossil and total were not measured indepently.
     it's way too linear of a fit.
-    Eannul_F was not doubt calculated from UEF    
+    Eannul_F was not doubt calculated from UEF 
     
+2018-11-26
+    2 separate next steps - combine all the data.tables while 
+    aligning the water heater models as much as possible. 
+    determine duplicates to find basic models
     
+    review algorithm to see what simplifications and assumptions are possible
     
+    memo to CEC appliance standards on what fields should be in the directory when it gets revised
     
+    another possible task is to examine technical specification sheets of common tankless WH 
+    basic models to update information about electricity usage
     
+    What about searching the internet for information on detailed monitoring of tankless WHS?
+    Use this for updating default electricity estimation and TC
+    
+Haile, James, and Marc Hoeschele. “PG&E Residential Code Readiness Project: G. J. Gardner Site Monitoring Report.” Frontier Energy, Inc. for Pacific Gas and Electric Company Codes and Standards, August 21, 2018. https://www.etcc-ca.com/file/1806/download?token=acbnvKRt.
+
+    they have monitored electricity on Domestic hot water is provided by a condensing natural gas tankless water heater Takagi (AT-H3S-OS-N) but not monitored gas use. Estimated monthly gas use by electicity use.
+    
+    Leni-Konig, Katrina, and Robert A. Davis. “Laboratory Testing of Residential Gas Water Heaters.” Emerging Technologies Program. San Ramon, CA: PG&E Applied Technology Services, December 2008. https://www.etcc-ca.com/file/1160/download?token=KY9Jd20Y.
+tested Takagi T-H1 build date 10/27/2006
+Average Measured Power Use Burner On (W) 60
+Average Measured Power Use Idle (W) 6
+
+https://www.etcc-ca.com/reports/residential-water-heating-program#
+https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-water-heaters-pge-service-territory#
+https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-water-heaters-pge-service-territory
+
+2018-11-27
+    for now merge directories then find basic models
+    saved the names to columnar .csv file to examine how to merge.
