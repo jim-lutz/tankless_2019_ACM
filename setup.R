@@ -46,6 +46,10 @@ library(tidyverse)
 if(!require(plotly)){install.packages("plotly")}
 library(plotly)
 
+# work with openxlsx
+if (!require('openxlsx')) install.packages('openxlsx')
+library('openxlsx')
+
 # change the default background for ggplot2 to white, not gray
 theme_set( theme_bw() )
 

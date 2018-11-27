@@ -137,3 +137,6 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
 2018-11-27
     for now merge directories then find basic models
     saved the names to columnar .csv file to examine how to merge.
+    
+    use openxlsx to save lists of names from each data.table to a different sheet in dirnames.xlsx
+    
