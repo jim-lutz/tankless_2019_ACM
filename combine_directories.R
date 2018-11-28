@@ -1,6 +1,6 @@
 # combine_directories.R
-
-# script to combing DOE, CEC and AHRI tankless WH directories
+# script to combine DOE, CEC and AHRI tankless WH directory names
+# into data/dirnames.xlsx
 
 # set packages & etc
 source("setup.R")

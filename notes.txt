@@ -139,4 +139,14 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     saved the names to columnar .csv file to examine how to merge.
     
     use openxlsx to save lists of names from each data.table to a different sheet in dirnames.xlsx
+
+2018-11-28
+    compare fields in different directories for basic models and harmonization?
+    
+    to identify basic models, group by UEF, RE, and MaxGPM
+    do that for AHRI, DOE, and CEC directories,
+    see how well DOE's Basic_Model_Number matches 
+    compare results tri-axial plots?
+    https://stackoverflow.com/questions/39124963/triaxial-ratio-diagrams-in-r-i-e-rotated-axes
+    
     
