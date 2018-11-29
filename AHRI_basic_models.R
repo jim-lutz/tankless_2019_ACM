@@ -21,20 +21,21 @@ setnames(DT_AHRI,
          old = c("Uniform Energy Factor",
                  "UED Recovery Efficiency, %",
                  "Max GPM",
-                 "Input (MBtu/h)"),
-         new = c("UEF", "RE", "MaxGPM", "Input.rated")
+                 "Input (MBtu/h)",
+                 "Usage Bin"),
+         new = c("UEF", "RE", "MaxGPM", "Input.rated", "bin")
          )
 
 # review UEF, RE & MaxGPM data
-summary(DT_AHRI[, list(UEF,RE,MaxGPM,Input.rated)])
-#      UEF               RE            MaxGPM       Input.rated   
-# Min.   :0.7900   Min.   :79.00   Min.   :3.100   Min.   :120.0  
-# 1st Qu.:0.8100   1st Qu.:83.00   1st Qu.:4.450   1st Qu.:160.0  
-# Median :0.8200   Median :85.00   Median :4.850   Median :180.0  
-# Mean   :0.8594   Mean   :89.29   Mean   :4.719   Mean   :176.1  
-# 3rd Qu.:0.9300   3rd Qu.:96.00   3rd Qu.:5.200   3rd Qu.:199.0  
-# Max.   :0.9600   Max.   :99.00   Max.   :5.900   Max.   :199.9  
-# NA's   :41                                                      
+summary(DT_AHRI[, list(UEF,RE,MaxGPM,Input.rated, bin)])
+  #      UEF               RE            MaxGPM       Input.rated        bin           
+  # Min.   :0.7900   Min.   :79.00   Min.   :3.100   Min.   :120.0   Length:340        
+  # 1st Qu.:0.8100   1st Qu.:83.00   1st Qu.:4.450   1st Qu.:160.0   Class :character  
+  # Median :0.8200   Median :85.00   Median :4.850   Median :180.0   Mode  :character  
+  # Mean   :0.8594   Mean   :89.29   Mean   :4.719   Mean   :176.1                     
+  # 3rd Qu.:0.9300   3rd Qu.:96.00   3rd Qu.:5.200   3rd Qu.:199.0                     
+  # Max.   :0.9600   Max.   :99.00   Max.   :5.900   Max.   :199.9                     
+  # NA's   :41                                                                         
 
 # what's with the missing UEFs?
 DT_AHRI[is.na(UEF)]
@@ -50,7 +51,7 @@ DT_AHRI[, RE := RE/100]
 # count of records for each set
 DT_AHRI_mdlcount <-
   DT_AHRI[ , list(nAHRIrefnum = .N),
-           by=c("MaxGPM","UEF","RE", "Input.rated")][order(-MaxGPM, -UEF)]
+           by=c("MaxGPM","UEF","RE", "Input.rated", "bin")][order(-MaxGPM, -UEF)]
 
 # add a mdlnum
 DT_AHRI_mdlcount[, mdlnum := .I]
@@ -60,7 +61,9 @@ DT_AHRI_mdlcount[, mdlnum := .I]
 ggpairs(data = DT_AHRI_mdlcount, 
         columns = 1:4, # columns to plot, default to all.
         axisLabels = "internal",
-        title = "AHRI directory tankless models"
+        mapping=ggplot2::aes(colour = bin),
+        title = "AHRI directory tankless models",
+        lower = list(continuous = "smooth")
         )
 
 # get date to include in file name
@@ -106,12 +109,12 @@ DT_AHRI_mdlcount[ , UEF.res := residuals(fit)]
 # melt the data to long format
 DT_AHRI_long_res <-
   melt(data = DT_AHRI_mdlcount,
-       id.vars = "UEF.res",
+       id.vars = c("UEF.res","bin"),
        measure.vars = c("MaxGPM", "UEF", "RE", "Input.rated" ))
 
 # now try plotting it
 ggplot(data = DT_AHRI_long_res,
-       aes(x=value, y=UEF.res)) + 
+       aes(x=value, y=UEF.res, color = bin)) + 
   geom_point() +
   facet_wrap(facets = "variable",
              scales = "free_x") +
@@ -121,3 +124,4 @@ ggplot(data = DT_AHRI_long_res,
 # save chart
 ggsave(filename = paste0("charts/","AHRI_residuals_",d,".png"))
 
+# 

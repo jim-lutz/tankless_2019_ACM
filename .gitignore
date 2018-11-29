@@ -1,5 +1,7 @@
 nohistory
 data
+charts
+
 
 # History files
 .Rhistory
