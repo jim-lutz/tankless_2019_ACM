@@ -152,4 +152,19 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     https://datascienceplus.com/story-of-pairs-ggpairs-and-the-linear-regression/
     https://www.r-bloggers.com/example-9-17-much-better-pairs-plots/
     
+2018-11-29
+    was thinking could get TC from UEF & RE, but there's really 2 unknowns being solved then,
+    P input during RE firing and Lcyc total cyclic loss after each draw. And this depends on TC.
+    Will have to stay with TC numbers from Peter's dissipation data. 
+    Still need to write up that analysis.
     
+    Go back to finding limits on RE as f(UEF).
+    used ggpairs on DT_AHRI_mdlcount
+    very good correlation between RE & UEF, clear break between condensing and non-condensing
+    > 0.9 RE is condensing.
+    next see if residual correlates w/ MaxGPM, 
+    include  Rated input, only 180 & 199? no there's more 175, 160, 140, & 120 and others
+    
+     
+   
+        
