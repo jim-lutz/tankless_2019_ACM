@@ -55,7 +55,14 @@ DT_AHRI_mdlcount <-
 DT_AHRI_mdlcount[, mdlnum := .I]
 
 # look at some plots
-# https://www.r-bloggers.com/example-9-17-much-better-pairs-plots/
+# https://www.r-bloggers.com/plot-matrix-with-the-r-package-ggally/
+ggpairs(data = DT_AHRI_mdlcount, 
+        columns = 1:3, # columns to plot, default to all.
+        axisLabels = "internal"
+        )
+
+#
+
 
 
 
