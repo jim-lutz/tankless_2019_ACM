@@ -149,4 +149,7 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     compare results tri-axial plots?
     https://stackoverflow.com/questions/39124963/triaxial-ratio-diagrams-in-r-i-e-rotated-axes
     
+    https://datascienceplus.com/story-of-pairs-ggpairs-and-the-linear-regression/
+    https://www.r-bloggers.com/example-9-17-much-better-pairs-plots/
+    
     
