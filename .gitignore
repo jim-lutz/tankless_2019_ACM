@@ -1,6 +1,6 @@
 nohistory
-data
-charts
+data/
+charts/
 
 
 # History files

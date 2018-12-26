@@ -48,7 +48,7 @@ DT_AHRI <-
 # convert RE to fraction
 DT_AHRI[, RE := RE/100]
 
-# count of records for each set
+# count of records for each set of models
 DT_AHRI_mdlcount <-
   DT_AHRI[ , list(nAHRIrefnum = .N),
            by=c("MaxGPM","UEF","RE", "Input.rated", "bin")][order(-MaxGPM, -UEF)]
@@ -124,4 +124,4 @@ ggplot(data = DT_AHRI_long_res,
 # save chart
 ggsave(filename = paste0("charts/","AHRI_residuals_",d,".png"))
 
-# 
+

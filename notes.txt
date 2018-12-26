@@ -168,5 +168,13 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     nothing in UEF.residuals has any obvious pattern.
     looking at bin, still don't see anything
     
-   
+2018-12-26
+    reviewing AHRI data correlations
+    UEF ~ RE correlation 0.985, slightly better high usage
+    also good correlation between MaxGPM & Input.rated, better on medium bin
+    some negative correlation Input.rated & RE, much stronger medium bin than high bin
+    maybe using same size HX across input ranges?
+    no obvious patterns looking at residuals to UEF fit.
+    
+    look at other directories.
         
