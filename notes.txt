@@ -189,4 +189,9 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     That's the number of points available for UEF?
     Think about clustering the data into 8 groups to see what's unique about each cluster?
     
+    plotting just RE vs UEF, the 'clusters' are round-off distances from the fitted line.
+    
+    plotted RE = UEF + mean(RE-UEF)
+    
+    see about plotting confidence interval around that 
         

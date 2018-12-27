@@ -94,10 +94,43 @@ DT_DOE_dir_mdlcount[, RE.res.man := RE - RE.man]
 # look at the distribution of RE.res.man
 # check out plot of RE vs UEF
 ggplot(data=DT_DOE_dir_mdlcount, aes(x=RE.res.man)) +
-  geom_bar(stat="count")
+  geom_histogram()
 # why a blank chart?
 
 qplot(DT_DOE_dir_mdlcount[,RE.res.man])
+
+# difference between RE & UEF
+DT_DOE_dir_mdlcount[, RE.diff := RE - UEF]
+
+# plot the histogram with a normal approximation
+ggplot(DT_DOE_dir_mdlcount, aes(x=RE.diff)) + 
+  geom_histogram() +
+  stat_function(fun = dnorm, 
+                args = list(
+                  mean = mean(DT_DOE_dir_mdlcount$RE.diff), 
+                  sd = sd(DT_DOE_dir_mdlcount$RE.diff)
+                  )
+                )
+
+# mean & sd of RE.diff
+mean(DT_DOE_dir_mdlcount$RE.diff)
+# [1] 0.02893204
+sd(DT_DOE_dir_mdlcount$RE.diff)
+# [1] 0.01364196
+
+# check out plot of RE vs UEF
+ggplot(data=DT_DOE_dir_mdlcount,
+       aes(x=UEF, y=RE)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  geom_abline(slope = 1.0, intercept = mean(DT_DOE_dir_mdlcount$RE.diff) ) +
+  geom_text(x = .9, y = .875,
+            label= paste("sd =", sd(DT_DOE_dir_mdlcount$RE.diff)))
+
+
+
+
+
 
 
 
