@@ -177,4 +177,16 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     no obvious patterns looking at residuals to UEF fit.
     
     look at other directories.
+    also make the flowchart.txt file
+    
+    looking at residuals of RE = slope * UEF + offset in DOE directory
+    shows sets of declining straight lines of residuals vs UEF and RE about .02 apart
+    is this a squared term, or a result of rounding to 0.01?
+    it was there in the AHRI residual charts. not as obvious because of shapes of panels
+    
+    tried squared term, just got sets of quadratics
+    suspect it might have something to do with the rounding of UEF & RE. There's 8 lines,
+    That's the number of points available for UEF?
+    Think about clustering the data into 8 groups to see what's unique about each cluster?
+    
         
