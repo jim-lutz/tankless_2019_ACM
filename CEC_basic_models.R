@@ -113,4 +113,19 @@ ggplot(data = DT_CEC_long_res,
 # save chart
 ggsave(filename = paste0("charts/","CEC_residuals_",d,".png"))
 
+# plot of RE vs UEF
+ggplot(data = DT_tankless) +
+  geom_point(aes(x = UEF, y = RE)) +
+  geom_smooth(aes(x = UEF, y = RE), method = "lm")
+
+# examine outlier
+DT_tankless[RE > .98 & UEF < .95]
+
+DT_tankless[Brand == "Bosch"]
+
+# plot of RE vs UEF
+ggplot(data = DT_tankless[Brand == "Bosch"]) +
+  geom_point(aes(x = UEF, y = RE)) +
+  geom_smooth(aes(x = UEF, y = RE), method = "lm")
+
 

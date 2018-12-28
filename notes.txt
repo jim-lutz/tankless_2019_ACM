@@ -199,5 +199,29 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     get CEC basic models & plot
     about the same results as AHRI & DOE, including the outlier at RE = 1.00
     
+    look at that outlier model
+                       Manufacturer          Brand   Model Number Rated Volume MaxGPM
+    1: Bosch Thermotechnology Corp.          Bosch   T9800 SE 160            1    4.7
+    here's a submittal sheet
+    https://www.bosch-climate.us/files/Greentherm_9000_SE160_Submittal_Sheet_US.pdf
+
+    check listing in Energy Star
+    https://www.energystar.gov/productfinder/product/certified-water-heaters/details/2317257
+    gives same results
     
-            
+    plot just the Bosch models?
+    it's even more of an outlier compared to the other Bosch products!
+    
+    Confidence Intervals for Linear Regression Slope
+    https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/PASS/Confidence_Intervals_for_Linear_Regression_Slope.pdf
+    
+    https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule
+    
+    basic models and plots of RE vs UEF from all 3 directories
+    standard deviations of Bosch model from linear fit of all basic models in all 3 directories?
+    
+    Nah, first see about the limits in the tankless algorithm    
+    
+    
+    
+
