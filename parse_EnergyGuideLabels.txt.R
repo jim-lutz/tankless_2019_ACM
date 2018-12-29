@@ -13,7 +13,7 @@ l_fn <-
 # 340 of them
 
 # make a blank data.table to hold everything
-DT_EGL <- data.table(character(length = length(l_fn))) #  creates a 0-row data.table
+DT_EGL <- data.table(character(length = length(l_fn))) #  creates a 340-row data.table
 
 # loop through the txt files
 for( fn in 1:length(l_fn) ) { 
@@ -32,7 +32,7 @@ for( fn in 1:length(l_fn) ) {
   # remove line breaks, returns & EOF
   EGLtxt <- str_replace_all(EGLtxt, "[\r\n\f]" , " ")
   
-  # put into the data.table for debugging later
+  # put into the data.table for parsing later
   DT_EGL[fn, EGL := EGLtxt]
 
 }
@@ -59,7 +59,7 @@ DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
             )
        ] 
 
-# look at all the MaxGPMs
+# list the number of AHRIrefnums by MaxGPM
 DT_EGL[, list(n = length(AHRIrefnum)),
        by=MaxGPM][order(MaxGPM)]
 # looks reasonable
@@ -77,11 +77,12 @@ DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
             )
        ] 
 
-# look at all the brands
+# look at the number of AHRIrefnums by brand
 DT_EGL[, list(n = length(AHRIrefnum)),
        by=brand][order(-n)]
 # looks reasonable
 
+# find AHRIrefnum that are missing brands
 DT_EGL[is.na(brand) & !is.na(EGL),
        list(AHRIrefnum, 
             EGL = str_sub(EGL, 1, 20),
@@ -89,8 +90,7 @@ DT_EGL[is.na(brand) & !is.na(EGL),
             )
        ] 
 
-
-# get the model number
+# get the model numbers
 DT_EGL[, model_num := str_extract(EGL, "Model [A-Z0-9l. -]+ Estimated")]
 DT_EGL[, model_num := str_replace(model_num, "Model ", "")]
 DT_EGL[, model_num := str_replace(model_num, " Estimated", "")]
@@ -106,10 +106,10 @@ DT_EGL[AHRIrefnum %in% c('10014414', '4397486', '9970164', '10014415'),
             )
        ] 
 
-# look at all the model_num
+# look at at the number of AHRIrefnums by model_num
 DT_EGL[, list(n = length(AHRIrefnum)),
        by=model_num][order(-n)]
-# 7 missing, 2 duplicates, only 1 of everything else
+# 5 missing, 2 duplicates, only 1 of everything else
 
 DT_EGL[is.na(model_num) & EGL != "",
        list(AHRIrefnum, 
@@ -158,6 +158,37 @@ ggplot(data = DT_EGL) +
   geom_bar( aes(x = Eannual_f), width = 1 ) +
   facet_wrap(vars(brand))
 # looks plausible
+
+# get the Estimated Yearly Energy Cost
+DT_EGL[, Eannual_cost := str_extract(EGL, "Energy Cost+.+Cost Range")]
+DT_EGL[, Eannual_cost2 := str_extract(Eannual_cost, "[0-9$]{4}( |,)")]
+DT_EGL[str_detect(Eannual_cost2,"^9"), Eannual_cost3 := str_replace(Eannual_cost2,"9","$") ]
+
+# make sure nothing is missiong
+DT_EGL[is.na(Eannual_cost), list(AHRIrefnum, Eannual_cost)]
+DT_EGL[is.na(Eannual_cost2), list(AHRIrefnum, Eannual_cost, Eannual_cost2)]
+
+# tesseract problems with $196?
+DT_EGL[is.na(Eannual_cost2), list(AHRIrefnum, Eannual_cost, Eannual_cost2)]
+DT_EGL[is.na(Eannual_cost2) & !is.na(Eannual_cost), list(AHRIrefnum, Eannual_cost, Eannual_cost2)]
+DT_EGL[is.na(Eannual_cost2) & !is.na(Eannual_cost), AHRIrefnum]
+
+
+DT_EGL[str_detect(Eannual_cost2,"196"),list(AHRIrefnum, Eannual_cost, Eannual_cost2, Eannual_cost3)]
+
+DT_EGL[str_detect(Eannual_cost,"[0-9]"), list(AHRIrefnum, Eannual_cost)]
+
+
+# convert to numeric
+DT_EGL[, Eannual_cost := as.numeric(str_sub(Eannual_cost,2,4))]
+
+# look at some plots
+qplot(x = `Eannual_cost`,
+      data = DT_EGL)
+
+# look at the values
+summary(DT_EGL$Eannual_cost)
+
 
 # save DT_EGL as .Rdata for later use
 save(DT_EGL, file = "data/DT_EGL.Rdata")

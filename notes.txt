@@ -222,6 +222,13 @@ https://www.etcc-ca.com/reports/residential-feasibility-assessment-gas-tankless-
     
     Nah, first see about the limits in the tankless algorithm    
     
+    calculate missing therms from EnergyGuide label as 
+        Estimated yearly energy cost (dollars) / gas_cost - Estimated yearly energy use (therms)
+    
+    go back to egl and get annual cost as well. then calculate Eannual,e; Eannual,f; & F
+    
+    
+    
     
     
 
